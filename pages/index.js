@@ -2,7 +2,7 @@
  * Home Page File
  *
  * @package frontend/pages
- * @author Luis Andres <ion.podolean22@gmail.com>
+ * @author Ion Podolean <ion.podolean22@gmail.com>
  * @copyright 2021-01-16
  * */
 
@@ -40,11 +40,7 @@ export default function Home() {
                     .then((res) => {
                         setLatestProducts(res.data.latestProducts)
                 })
-            else
-                ApiService.home(false)
-                    .then((res) => {
-                        setLatestProducts(res.data.latestProducts)
-                })
+
             setLoginState(true)
         }
     })

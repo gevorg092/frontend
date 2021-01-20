@@ -2,7 +2,7 @@
  * Content Component File for Home Page
  *
  * @package frontend/components/header
- * @author Luis Andres <ion.podolean22@gmail.com>
+ * @author Ion Podolean <ion.podolean22@gmail.com>
  * @copyright 2021-01-16
  * */
 

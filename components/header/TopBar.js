@@ -2,14 +2,14 @@
  * Top Bar Component File for Header
  *
  * @package frontend/components/header
- * @author Luis Andres <ion.podolean22@gmail.com>
+ * @author Ion Podolean <ion.podolean22@gmail.com>
  * @copyright 2021-01-16
  * */
 
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Modal } from '@material-ui/core'
+import { Modal, Menu, MenuItem } from '@material-ui/core'
 import { LocationOn } from '@material-ui/icons'
 import ApiService from 'services/api'
 
@@ -221,6 +221,29 @@ export default function TopBar() {
             </div>
         </div>
     )
+
+    /**
+     * The Function for get state of menu
+     * **/
+    const [menuState, setMenuState] = useState(null)
+
+    /**
+     * The Function for open menu
+     * **/
+    const openMenu = (e) => {
+        setMenuState(e.currentTarget)
+    }
+
+    /**
+     * The Function for close menu
+     * **/
+    const closeMenu = () => {
+        setMenuState(null)
+    }
+
+    const logout = () => {
+
+    }
     const [locationOpen, setLocationOpen] = useState(false)
     const locationModalOpen = () => {
         setLocationOpen(true)
@@ -238,41 +261,49 @@ export default function TopBar() {
 
         </div>
     )
-    if(isClientSide) {
-        return (
-            <div className={`dis-flex ${classes.root}`}>
-                <div className={`col-md-12`}>
-                    <ul className={`ul-no-style float-left`}><a href={ '/contact' }><span className={`f-14`}> Contact </span></a></ul>
-                    <ul className={`ul-no-style dis-flex m-l-auto float-right`}>
-                        <li className={`${classes.nav_item}`}><a className={`cur-pointer`} onClick={ locationModalOpen }><span className={`f-14`}><LocationOn/> Location </span></a></li>
-                        |
-                        <li className={`dis-flex ${classes.nav_item} ${(getLocalStorageValue('authState')) ? modal_classes.dis_flex : modal_classes.dis_none}`}>
-                            <img className={`${classes.avatar}`} src={ (authUser.avatar) ? authUser.avatar : 'images/user.png' }/>
-                            <span className={`m-auto f-14 ${classes.username}`}>{ (getLocalStorageValue('authUser')) ? getLocalStorageValue('authUser').username : '' }</span>
-                        </li>
-                        <li className={`${classes.nav_item} ${(getLocalStorageValue('authState')) ? modal_classes.dis_none : modal_classes.dis_flex}`}><a className={`cur-pointer`} onClick={ loginModalOpen }><span className={`f-14`}> Login </span></a></li>
-                        <span className={`${(getLocalStorageValue('authState')) ? modal_classes.dis_none : modal_classes.dis_flex}`}>/</span>
-                        <li className={`${classes.nav_item} ${(getLocalStorageValue('authState')) ? modal_classes.dis_none : modal_classes.dis_flex}`}><a href={ '/register' }><span className={`f-14`}> Register </span></a></li>
-                    </ul>
-                </div>
-                <Modal
-                    className={`${classes.modal}`}
-                    open={ loginOpen }
-                    onClose={ loginModalClose }
-                >
-                    { loginModalBody }
-                </Modal>
-                <Modal
-                    open={ locationOpen }
-                    onClose={ locationModalClose }
-                >
-                    { locationModalBody }
-                </Modal>
+    return (
+        <div className={`dis-flex ${classes.root}`}>
+            <div className={`col-md-12`}>
+                <ul className={`ul-no-style float-left`}><a href={ '/contact' }><span className={`f-14`}> Contact </span></a></ul>
+                <ul className={`ul-no-style dis-flex m-l-auto float-right`}>
+                    <li className={`${classes.nav_item}`}><a className={`cur-pointer`} onClick={ locationModalOpen }><span className={`f-14`}><LocationOn/> Location </span></a></li>
+                    |
+                    { isClientSide ?
+                        <>
+                            <li className={`dis-flex ${classes.nav_item} ${(getLocalStorageValue('authState')) ? modal_classes.dis_flex : modal_classes.dis_none}`}>
+                                <a className={`dropdown-toggle`} onClick={openMenu} data-toggle='dropdown' aria-expanded='false'>
+                                    <img className={`${classes.avatar}`} src={ (authUser.avatar) ? authUser.avatar : 'images/user.png' }/>
+                                    <span className={`m-auto f-14 ${classes.username}`}>{ (getLocalStorageValue('authUser')) ? getLocalStorageValue('authUser').username : '' }</span>
+                                </a>
+                                <ul className="dropdown-menu">
+                                    <li>
+                                        <a href='/logout' className="logout"> Logout </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li className={`${classes.nav_item} ${(getLocalStorageValue('authState')) ? modal_classes.dis_none : modal_classes.dis_flex}`}><a className={`cur-pointer`} onClick={ loginModalOpen }><span className={`f-14`}> Login </span></a></li>
+                            <span className={`${(getLocalStorageValue('authState')) ? modal_classes.dis_none : modal_classes.dis_flex}`}>/</span>
+                            <li className={`${classes.nav_item} ${(getLocalStorageValue('authState')) ? modal_classes.dis_none : modal_classes.dis_flex}`}><a href={ '/register' }><span className={`f-14`}> Register </span></a></li>
+                        </>
+                        :
+                        ''
+                    }
+
+                </ul>
             </div>
-        )
-    } else {
-        return (
-            <div></div>
-        )
-    }
+            <Modal
+                className={`${classes.modal}`}
+                open={ loginOpen }
+                onClose={ loginModalClose }
+            >
+                { loginModalBody }
+            </Modal>
+            <Modal
+                open={ locationOpen }
+                onClose={ locationModalClose }
+            >
+                { locationModalBody }
+            </Modal>
+        </div>
+    )
 }

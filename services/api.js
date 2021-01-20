@@ -12,9 +12,6 @@ class ApiService {
     login(authData) {
         return axios.post(API_BASE_URL + '/login', authData)
     }
-    home() {
-        return axios.post(API_BASE_URL + '/')
-    }
 }
 
 export default new ApiService()
