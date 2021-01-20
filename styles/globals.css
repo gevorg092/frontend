@@ -1,0 +1,65 @@
+/**
+ * CSS File for Global Styles
+ *
+ * @package frontend/styles
+ * @author Luis Andres <ion.podolean22@gmail.com>
+ * @copyright 2021-01-16
+ * */
+
+body {
+    font-family: 'system-ui' !important;
+}
+
+.m-auto {
+    margin: auto;
+}
+.m-l-auto {
+    margin-left: auto;
+}
+
+a {
+    color: black !important;
+}
+a:hover {
+    text-decoration: none !important;
+}
+
+ul {
+    padding: 10px;
+}
+
+p, ul, a {
+    color: #333 !important;
+}
+
+.ul-no-style {
+    list-style-type: none;
+}
+
+.dis-flex {
+    display: flex;
+}
+
+.cur-pointer {
+    cursor: pointer;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.f-14 {
+    font-size: 14px;
+}
