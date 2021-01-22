@@ -3,7 +3,6 @@
  *
  * @package frontend/components/header
  * @author Ion Podolean <ion.podolean22@gmail.com>
- * @copyright 2021-01-16
  * */
 
 import React from 'react'
@@ -30,15 +29,15 @@ export default function Content(props) {
     const classes = useStyles()
     return (
         <div className={`row`}>
-            {props.latest_products.map((latest_product, index) => (
+            {props.latestProducts.map((latestProduct, index) => (
                 <div className={`col-md-3`} key={`${index}`}>
                     <div className={classes.root}>
                         <img
-                            src={ latest_product.image_default }
+                            src={ latestProduct.image_default }
                             className={ classes.product_image }
                         />
-                        <p className={classes.product_title}>{ latest_product.title }</p>
-                        <p className={ classes.product_price }>{ latest_product.price } { latest_product.currency }</p>
+                        <p className={classes.product_title}>{ latestProduct.title }</p>
+                        <p className={ classes.product_price }>{ latestProduct.price } { latestProduct.currency }</p>
                     </div>
                 </div>
             ))}

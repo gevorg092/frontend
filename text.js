@@ -9,9 +9,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Modal, Menu, MenuItem } from '@material-ui/core'
+import { Modal } from '@material-ui/core'
 import { LocationOn } from '@material-ui/icons'
 import ApiService from 'services/api'
+import LoginModal from 'components/global/LoginModal'
 
 const useStyles = makeStyles({
     root: {
@@ -29,7 +30,8 @@ const useStyles = makeStyles({
     },
     username: {
         padding: '0 5px',
-    }
+    },
+
 })
 const modalStyles = makeStyles({
     root: {
@@ -87,9 +89,6 @@ const modalStyles = makeStyles({
         color: 'red'
     }
 })
-
-
-
 
 export default function TopBar() {
     const classes = useStyles()
@@ -242,7 +241,8 @@ export default function TopBar() {
     }
 
     const logout = () => {
-
+        window.localStorage.clear()
+        window.location.reload()
     }
     const [locationOpen, setLocationOpen] = useState(false)
     const locationModalOpen = () => {
@@ -270,25 +270,20 @@ export default function TopBar() {
                     |
                     { isClientSide ?
                         <>
-                            <li className={`dis-flex ${classes.nav_item} ${(getLocalStorageValue('authState')) ? modal_classes.dis_flex : modal_classes.dis_none}`}>
+                            <li className={`${classes.nav_item} ${(getLocalStorageValue('authState')) ? 'dis-flex' : 'dis-none'}`}>
                                 <a className={`dropdown-toggle`} onClick={openMenu} data-toggle='dropdown' aria-expanded='false'>
                                     <img className={`${classes.avatar}`} src={ (authUser.avatar) ? authUser.avatar : 'images/user.png' }/>
                                     <span className={`m-auto f-14 ${classes.username}`}>{ (getLocalStorageValue('authUser')) ? getLocalStorageValue('authUser').username : '' }</span>
                                 </a>
-                                <ul className="dropdown-menu">
-                                    <li>
-                                        <a href='/logout' className="logout"> Logout </a>
-                                    </li>
-                                </ul>
                             </li>
-                            <li className={`${classes.nav_item} ${(getLocalStorageValue('authState')) ? modal_classes.dis_none : modal_classes.dis_flex}`}><a className={`cur-pointer`} onClick={ loginModalOpen }><span className={`f-14`}> Login </span></a></li>
-                            <span className={`${(getLocalStorageValue('authState')) ? modal_classes.dis_none : modal_classes.dis_flex}`}>/</span>
-                            <li className={`${classes.nav_item} ${(getLocalStorageValue('authState')) ? modal_classes.dis_none : modal_classes.dis_flex}`}><a href={ '/register' }><span className={`f-14`}> Register </span></a></li>
+                            <li className={`${classes.nav_item} ${(getLocalStorageValue('authState')) ? 'dis-flex' : 'dis-none'}`}><a onClick={logout}> Logout </a></li>
+                            <li className={`${classes.nav_item} ${(getLocalStorageValue('authState')) ? 'dis-none' : 'dis-flex'}`}><a className={`cur-pointer`} onClick={ loginModalOpen }><span className={`f-14`}> Login </span></a></li>
+                            <span className={`${(getLocalStorageValue('authState')) ? 'dis-none' : 'dis-flex'}`}>/</span>
+                            <li className={`${classes.nav_item} ${(getLocalStorageValue('authState')) ? 'dis-none' : 'dis-flex'}`}><a href={ '/register' }><span className={`f-14`}> Register </span></a></li>
                         </>
                         :
                         ''
                     }
-
                 </ul>
             </div>
             <Modal

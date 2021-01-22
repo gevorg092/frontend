@@ -1,5 +1,5 @@
 /**
- * The register page file.
+ * The login page file.
  *
  * @package frontend/pages
  * @author Ion Podolean <ion.podolean22@gmail.com>
@@ -7,7 +7,7 @@
 
 import { makeStyles } from '@material-ui/core/styles'
 import Header from "../components/header";
-import Register from "../components/contents/Register";
+import Login from "../components/contents/Login";
 import Footer from "../components/footer";
 import React from "react";
 
@@ -21,7 +21,7 @@ export default function Home() {
     return (
         <div className={`${classes.root} m-auto`}>
             <Header/>
-            <Register/>
+            <Login/>
             <Footer/>
         </div>
     )

@@ -1,13 +1,12 @@
 /**
- * Header Component File
+ * The header component.
  *
  * @package frontend/components/header
  * @author Ion Podolean <ion.podolean22@gmail.com>
- * @copyright 2021-01-16
  * */
 
 import React from 'react'
-import TopBar from 'components/header/TopBar'
+import TopBar from 'components/header/topbar'
 import NavBar from 'components/header/NavBar'
 import CategoriesBar from 'components/header/CategoriesBar'
 

@@ -1,13 +1,11 @@
 /**
- * Home Page File
+ * The home page file.
  *
  * @package frontend/pages
  * @author Ion Podolean <ion.podolean22@gmail.com>
- * @copyright 2021-01-16
  * */
 
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.css'
 import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Header from 'components/header'
@@ -30,6 +28,7 @@ function getLocalStorageValue(key) {
 export default function Home() {
     const classes = useStyles()
     const [latestProducts, setLatestProducts] = useState([])
+    const [allCountries, setAllCountries] = useState([])
     const [loginState, setLoginState] = useState(false)
 
     const authCheck = getLocalStorageValue('authState')
@@ -49,7 +48,7 @@ export default function Home() {
         <div className={`${classes.root} m-auto`}>
             <Header/>
             <Content
-                latest_products = { latestProducts }
+                latestProducts = { latestProducts }
             />
             <Footer/>
         </div>
